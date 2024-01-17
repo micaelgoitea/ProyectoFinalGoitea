@@ -1,0 +1,86 @@
+[
+    {
+        "ID": 1,
+        "nombre": "Hamburguesa con Papas Fritas",
+        "precio": 500,
+        "valoración": 5,
+        "vegetariano": false,
+        "sinTACC": false,
+        "personasQueComen": 1,
+        "descripcion": "Jugosa, tierna, sabrosa, irresistible, queso derretido, fresca, deliciosa, apetitosa.",
+        "tipoDeCocina": "Argentina",
+        "img": "IMG/Hamburguesa.png"
+    },
+    {
+        "ID": 2,
+        "nombre": "Fideos con Tuco",
+        "precio": 300,
+        "valoración": 3,
+        "vegetariano": true,
+        "sinTACC": false,
+        "personasQueComen": 1,
+        "descripcion": "Sabrosos fideos al dente con delicioso y aromático tuco casero.",
+        "tipoDeCocina": "Italiana",
+        "img": "IMG/Fideos.png"
+    },
+    {
+        "ID": 3,
+        "nombre": "Porción de papas con Cheddar",
+        "precio": 800,
+        "valoración": 5,
+        "vegetariano": true,
+        "sinTACC": true,
+        "personasQueComen": 2,
+        "descripcion": "Papas doradas cubiertas de cheddar fundido, irresistible y delicioso.",
+        "tipoDeCocina": "Argentina",
+        "img": "IMG/Papas.png"
+    },
+    {
+        "ID": 4,
+        "nombre": "Ravioles",
+        "precio": 700,
+        "valoración": 4,
+        "vegetariano": true,
+        "sinTACC": false,
+        "personasQueComen": 1,
+        "descripcion": "Ravioles rellenos de exquisitez, pasta tierna, en salsa encantadora.",
+        "tipoDeCocina": "Italiana",
+        "img": "IMG/Ravioles.png"
+    },
+    {
+        "ID": 5,
+        "nombre": "Carne al Horno",
+        "precio": 1000,
+        "valoración": 4,
+        "vegetariano": false,
+        "sinTACC": true,
+        "personasQueComen": 2,
+        "descripcion": "Carne al horno jugosa, papas doradas: una delicia asada perfecta.",
+        "tipoDeCocina": "Argentina",
+        "img": "IMG/Carne.png"
+    },
+    {
+        "ID": 6,
+        "nombre": "Milanesa a la Napolitana",
+        "precio": 1200,
+        "valoración": 5,
+        "vegetariano": false,
+        "sinTACC": true,
+        "personasQueComen": 2,
+        "descripcion": "Milanesa tierna y crujiente, cubierta con salsa, queso derretido y tomate fresco: un placer napolitano irresistible.",
+        "tipoDeCocina": "Argentina",
+        "img": "IMG/Milanesa.png"
+    },
+    {
+        "ID": 7,
+        "nombre": "Tacos de Pollo, Carne o Verdura",
+        "precio": 1500,
+        "valoración": 5,
+        "vegetariano": true,
+        "sinTACC": true,
+        "personasQueComen": 3,
+        "descripcion": "Tacos sabrosos con tortillas suaves, rellenos frescos, salsa picante y toppings coloridos. Experiencia mexicana auténtica.",
+        "tipoDeCocina": "Mexicana",
+        "img": "IMG/Tacos.png"
+    }
+]
