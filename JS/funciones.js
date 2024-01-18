@@ -5,7 +5,7 @@ function visualizarLaCarta (platosDisponibles, contenedorACompletar){
     console.log(platosDisponibles);
     platosDisponibles.forEach(plato => {
         contenedorACompletar.innerHTML += `
-            <div class="platos-container class="card" style="width: 16rem;">
+            <div class="platos-container class="card" style="width: 16rem">
                 <img src="${plato.img}" />
                 <h4>${plato.nombre}</h4>
                 <p>$${plato.precio}</p>
@@ -35,7 +35,11 @@ function agregarALaCuenta (id) {
                 mostrarCuenta();
         })
         .catch((error) => {
-          "Poner Error con SweetAlert"
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Algo salió mal en la carga del Plato a la cuenta",
+              });
         })
 
 }
@@ -47,14 +51,22 @@ function mostrarCuenta() {
     const cuentaFinal = document.getElementById('cuenta-final');
     cuentaFinal.innerHTML = '<h2>Cuenta Final:</h2>';
     cuenta.forEach(plato => {
+        var cantidad = 1;
         cuentaFinal.innerHTML += `
-            <p>${plato.nombre} \t $${plato.precio}</p>
+            <p> ${plato.nombre} \t $${plato.precio} \t <button onclick = "eliminarPlato(${plato.ID})">❌</button> </p>
+            
+            
         `;
     });
     cuentaFinal.innerHTML += `
             <h3>Total de la Cuenta: $${totalDeLaCuenta()}</h3>
         `;
     sincronizarStorage();
+}
+
+function eliminarPlato(id) {
+    cuenta = cuenta.filter(plato => plato.ID != id);
+    mostrarCuenta();
 }
 
 // Calcular el total de la cuenta
@@ -68,7 +80,18 @@ function totalDeLaCuenta() {
 }
 
 function borrarLaCuenta() {
-    localStorage.clear();
+    while (cuentaFinal.firstChild) {
+        cuentaFinal.removeChild(cuentaFinal.firstChild);
+      }
+      localStorage.clear();
+      cuentaFinal.innerHTML += `
+            <h3>Total de la Cuenta: $${0}</h3>
+        `;
+    Swal.fire({
+        title: "Cuenta Cerrada",
+        text: "Cuenta cerrada Satisfactoriamente",
+        icon: "success"
+      });
 }
 
 // Array Method para filtrar y obtener solo la comida apta para celíacos.

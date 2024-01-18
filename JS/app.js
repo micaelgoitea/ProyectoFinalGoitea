@@ -12,10 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
            visualizarLaCarta(menuVeggie, contenedorPlatosVeggies);
         })
         .catch((error) => {
-          "Poner Error con SweetAlert"
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo salió mal en la carga del Menú",
+          });
         })
   })
-
 
 
 botonDeVaciado.addEventListener('click', borrarLaCuenta);
