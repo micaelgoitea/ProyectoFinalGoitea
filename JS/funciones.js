@@ -34,6 +34,13 @@ function agregarALaCuenta(id) {
                     comida: plato
                 };
             }
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Plato añadido a la cuenta",
+                showConfirmButton: false,
+                timer: 1500
+              });
             mostrarCuenta();
         })
         .catch((error) => {
