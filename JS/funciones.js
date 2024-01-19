@@ -86,6 +86,7 @@ function borrarLaCuenta() {
         cuentaFinal.removeChild(cuentaFinal.firstChild);
     }
     localStorage.clear();
+    cuentita = {};
     cuentaFinal.innerHTML += `
             <h3>Total de la Cuenta: $${0}</h3>
         `;
