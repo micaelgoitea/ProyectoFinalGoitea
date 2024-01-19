@@ -1,18 +1,15 @@
 // Función para visualizar el menú disponible para pedir.
 
-
-function visualizarLaCarta (platosDisponibles, contenedorACompletar){
-    console.log(platosDisponibles);
+function visualizarLaCarta(platosDisponibles, contenedorACompletar) {
     platosDisponibles.forEach(plato => {
         contenedorACompletar.innerHTML += `
-            <div class="platos-container class="card" style="width: 16rem">
+            <div class="platos-container card" style="width: 16rem">
                 <img src="${plato.img}" />
                 <h4>${plato.nombre}</h4>
                 <p>$${plato.precio}</p>
                 <p>Valoracion: ${plato.valoración}</p>
                 <p>${plato.tipoDeCocina}</p>
                 <p>${plato.descripcion}</p>
-                
                 <button onclick = "agregarALaCuenta(${plato.ID})">Agregar a la Cuenta</button>
             </div>
         `;
@@ -21,43 +18,43 @@ function visualizarLaCarta (platosDisponibles, contenedorACompletar){
 
 // Función para agregar a la cuenta el Plato que fue clickeado con "Agregar a la Cuenta"
 
+function agregarALaCuenta(id) {
 
-
-function agregarALaCuenta (id) {
-    
     fetch('DATA/platos.json')
         .then((respuesta) => {
-          return respuesta.json()
+            return respuesta.json()
         })
-        .then ((data) => {
-                const plato = data.find(plato => plato.ID == id);
-                cuenta.push(plato);
-                mostrarCuenta();
+        .then((data) => {
+            const plato = data.find(plato => plato.ID == id);
+            if (cuentita[plato.ID]) {
+                cuentita[plato.ID].cantidad += 1;
+            } else {
+                cuentita[plato.ID] = {
+                    cantidad: 1,
+                    comida: plato
+                };
+            }
+            mostrarCuenta();
         })
         .catch((error) => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Algo salió mal en la carga del Plato a la cuenta",
-              });
+            });
         })
-
 }
-
 
 // Función para mostrar la cuenta final de todos los pedidos de una mesa.
 
 function mostrarCuenta() {
     const cuentaFinal = document.getElementById('cuenta-final');
     cuentaFinal.innerHTML = '<h2>Cuenta Final:</h2>';
-    cuenta.forEach(plato => {
-        var cantidad = 1;
+    Object.keys(cuentita).forEach(idPlato => {
         cuentaFinal.innerHTML += `
-            <p> ${plato.nombre} \t $${plato.precio} \t <button onclick = "eliminarPlato(${plato.ID})">❌</button> </p>
-            
-            
+        <p> ${cuentita[idPlato].cantidad} \t X \t ${cuentita[idPlato].comida.nombre} \t $${cuentita[idPlato].comida.precio} \t <button onclick = "eliminarPlato(${idPlato})">❌</button> </p>
         `;
-    });
+    })
     cuentaFinal.innerHTML += `
             <h3>Total de la Cuenta: $${totalDeLaCuenta()}</h3>
         `;
@@ -65,7 +62,12 @@ function mostrarCuenta() {
 }
 
 function eliminarPlato(id) {
-    cuenta = cuenta.filter(plato => plato.ID != id);
+    if (cuentita[id]) {
+        cuentita[id].cantidad -= 1;
+    }
+    if (cuentita[id].cantidad == 0) {
+        delete cuentita[id];
+    }
     mostrarCuenta();
 }
 
@@ -73,25 +75,25 @@ function eliminarPlato(id) {
 
 function totalDeLaCuenta() {
     let suma = 0;
-    for (const plato of cuenta) {
-        suma += plato.precio;
-    }
+    Object.keys(cuentita).forEach(idPlato => {
+        suma += cuentita[idPlato].comida.precio * cuentita[idPlato].cantidad;
+    })
     return suma;
 }
 
 function borrarLaCuenta() {
     while (cuentaFinal.firstChild) {
         cuentaFinal.removeChild(cuentaFinal.firstChild);
-      }
-      localStorage.clear();
-      cuentaFinal.innerHTML += `
+    }
+    localStorage.clear();
+    cuentaFinal.innerHTML += `
             <h3>Total de la Cuenta: $${0}</h3>
         `;
     Swal.fire({
         title: "Cuenta Cerrada",
         text: "Cuenta cerrada Satisfactoriamente",
         icon: "success"
-      });
+    });
 }
 
 // Array Method para filtrar y obtener solo la comida apta para celíacos.
@@ -143,10 +145,10 @@ function platoMasEconomico(listaDeComida) {
 }
 
 function sincronizarStorage() {
-    localStorage.setItem('cuentaFinal', JSON.stringify(cuenta));
+    localStorage.setItem('cuentaFinal', JSON.stringify(cuentita));
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    cuenta = JSON.parse(localStorage.getItem("cuentaFinal")) || [];
+    cuentita = JSON.parse(localStorage.getItem("cuentaFinal")) || {};
     mostrarCuenta();
 });

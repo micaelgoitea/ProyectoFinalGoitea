@@ -13,9 +13,10 @@ img {
 }
 
 .platos-container {
+    display: inline-flex;
+    align-items: center;
     background-color: bisque;
     text-align: center;
-    display: inline-block;
     border: 1px solid black;
     padding: 1rem;
     margin: 1rem;
