@@ -83,12 +83,12 @@ function totalDeLaCuenta() {
 
 function borrarLaCuenta() {
     while (cuentaFinal.firstChild) {
-        cuentaFinal.removeChild(cuentaFinal.firstChild);
+      cuentaFinal.removeChild(cuentaFinal.firstChild);
     }
     localStorage.clear();
     cuentita = {};
     cuentaFinal.innerHTML += `
-            <h3>Total de la Cuenta: $${0}</h3>
+          <h3>Total de la Cuenta: $${0}</h3>
         `;
     Swal.fire({
         title: "Cuenta Cerrada",
